@@ -1,1 +1,1 @@
-# nfo-db
+see nfo.crackhub.site
