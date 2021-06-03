@@ -20,20 +20,17 @@ def upload_file():
     try:
         if request.method == 'POST':
             if 'file' not in request.files:
-                return('No file part')
+                flash('No file part')
+                return redirect(request.url)
             file = request.files['file']
             rls_name = request.form['rls']
             if file.filename == '':
-                return('No selected file')
+                return()
             if file and allowed_file(file.filename):
                 filename = file.filename
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 os.rename(f'./data/{filename}', f'./data/{rls_name}.nfo')
-                nfo_renamed = f'./data{rls_name}.nfo'
-                if os.path.isfile(nfo_renamed):
-                    FileExistsError
-                else:
-                    return render_template('complete.html', rls_name=rls_name)
+                return render_template('complete.html', rls_name=rls_name)
             else:
                 error_msg = 'Only NFO Files Are Allowed To Be Uploaded!'
                 error_code = 403
