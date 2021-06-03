@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NFO DB | API</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='bootstrap.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='mdb.dark.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='all.min.css') }}"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">NFO DB</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/api">API</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <h1 style="text-align: center">NFO DB API Documentation</h1>
+    <div class="container">
+      <h4 class="mb-5">URL: <code>/api/upload</code></h4>
+      <h4 class="mb-5 mt-5">METHOD: <code>POST</code></h4>
+      <h4 class="mb-5 mt-5">
+        Example cURL Request:
+        <code
+          >curl -F "file=@example.nfo" -F "rls=Example.Release-TEST"
+          https://nfo.crackhub.site/api/upload</code
+        >
+        <a href="https://paste.crackhub.site/?fcc44a9fb0c68270#DSQiFLXefBNLDyBj3A2GE8LozeHZhNB53WKj3M5V1ryG" target="_blank">Python Requests Example</a>
+      </h4>
+      <button
+        class="btn btn-primary mb-2"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#success"
+        aria-expanded="false"
+        aria-controls="success"
+      >
+        Example Success Response
+      </button>
+      <div class="collapse mt-3" id="success">
+        <pre> <code>
+          {
+            "nfo_dlpath": "/nfo/dl/Example.Release-TEST",
+            "nfo_path": "/nfo/Example.Release-TEST",
+            "success": "True"
+          }
+        </code></pre>
+      </div>
+      <br>
+      <button
+      class="btn btn-primary"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#error"
+      aria-expanded="false"
+      aria-controls="error"
+    >
+      Example Error Response
+    </button>
+    <div class="collapse mt-3" id="error">
+      <pre> <code>
+    {
+      "error_code": 409,
+      "message": "NFO Already Exists!",
+      "success": "False"
+    }
+  </code></pre>
+    </div>
+    <script src="{{ url_for('static', filename='mdb.min.js') }}"></script>
+  </body>
+</html>
