@@ -9,6 +9,19 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 secret_key = "Super Random Secret Key"
 app.config['SECRET_KEY'] = secret_key
 
+def make_tree(path):
+    tree = dict(name=os.path.basename(path), children=[])
+    try: lst = os.listdir(path)
+    except OSError:
+        pass #ignore errors
+    else:
+        for name in lst:
+            fn = os.path.join(path, name)
+            if os.path.isdir(fn):
+                tree['children'].append(make_tree(fn))
+            else:
+                tree['children'].append(dict(name=name))
+    return tree
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -107,7 +120,16 @@ def nfo(rls):
 def dl(rls):
     nfo_name = f'{rls}.nfo'
     return send_from_directory(app.config['UPLOAD_FOLDER'], nfo_name, as_attachment=True)
+@app.route('/api/nfo/dl/<nfo>')
+def api_dl(nfo):
+    nfo_name = f'{nfo}'
+    return send_from_directory(app.config['UPLOAD_FOLDER'], nfo_name, as_attachment=True)
 
+@app.route('/data')
+def dirtree():
+    path = os.path.expanduser(u'./data')
+    return render_template('dirtree.html', tree=make_tree(path))
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
