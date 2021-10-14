@@ -72,7 +72,7 @@ def upload_file():
         os.remove(f"./data/{filename}")
         error_msg = "NFO Already Exists!"
         error_code = 403
-        return render_template("error.html", error_msg=error_msg, error_code=error_code)
+        return render_template("error.html", error_msg=error_msg, error_code=error_code), 403
 
 
 @app.route("/api/upload", methods=["GET", "POST"])
@@ -103,18 +103,18 @@ def api_upload():
                     "error_code": error_code,
                     "success": "False",
                 }
-                return response
+                return response, 403
         return 'NFO API, go to <a href="/api">here</a> for docs'
     except FileExistsError:
         os.remove(f"./data/{filename}")
         error_msg = "NFO Already Exists!"
-        error_code = 409
+        error_code = 403
         response = {
             "message": str(error_msg),
             "error_code": error_code,
             "success": "False",
         }
-        return response
+        return response, 403
 
 
 @app.route("/api")
@@ -132,7 +132,7 @@ def nfo(rls):
     except FileNotFoundError:
         error_msg = "NFO Not Found, be the First to add it!"
         error_code = 404
-        return render_template("error.html", error_msg=error_msg, error_code=error_code)
+        return render_template("error.html", error_msg=error_msg, error_code=error_code), 404
 
 
 @app.route("/nfo/dl/<rls>")
@@ -149,7 +149,6 @@ def api_dl(nfo):
     return send_from_directory(
         app.config["UPLOAD_FOLDER"], nfo_name, as_attachment=True
     )
-
 
 @app.route("/data")
 def dirtree():

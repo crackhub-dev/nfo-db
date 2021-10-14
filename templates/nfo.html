@@ -2,54 +2,53 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NFO Viewer | Viewing {{nfo_title}}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='mdb.dark.min.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='all.min.css') }}" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NFO Viewer | Viewing {{nfo_title}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='mdb.dark.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='all.min.css') }}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-  <div style="display: none;" id="rls">{{ rls }}</div>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">NFO DB</a>
-      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <div style="display: none;" id="rls">{{ rls }}</div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">NFO DB</a>
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/api">API</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/data">All NFOs</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://github.com/crackhub-dev/nfo-db" target="_blank">GitHub</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <style>
-    pre,
-    code {
-      color: white !important;
-    }
-  </style>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/api">API</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/data">All NFOs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/crackhub-dev/nfo-db" target="_blank">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <style>
+        pre,
+        code {
+            color: white !important;
+        }
+    </style>
 
-  <div class="container d-flex justify-content-center" style="
+    <div class="container d-flex justify-content-center" style="
         border: medium none;
         background: transparent none repeat scroll 0% 0%;
         font-family: terminal, 'courier new';
@@ -59,77 +58,99 @@
         overflow-y: hidden;
         -moz-background-inline-policy: -moz-initial;
       ">
-    <code>
+        <code>
       <div class="">
         <pre>
     {{nfo}}
     </pre>
     </code>
-  </div>
-  </div>
-  <div class="d-flex justify-content-center mb-4">
-    <a href="/nfo/dl/{{rls}}" class="">
-      <button class="btn btn-primary" style="margin-right: 5px;">Download NFO</button>
-    </a>
-    <button type="button" class="btn btn-secondary" data-mdb-toggle="modal" data-mdb-target="#rlsInfoModal"
-      id="rls-info-btn" style="margin-left: 5px; ">
-      Release Info
+    </div>
+    </div>
+    <div class="d-flex justify-content-center mb-4">
+        <a href="/nfo/dl/{{rls}}" class="">
+            <button class="btn btn-primary" style="margin-right: 5px;"><i class="fas fa-download"></i> Download NFO</button>
+        </a>
+        <button type="button" class="btn btn-secondary" data-mdb-toggle="modal" data-mdb-target="#rlsInfoModal" id="rls-info-btn" style="margin-left: 5px; ">
+          <i class="fas fa-info"></i> Release Info
     </button>
-    <a href="https://www.srrdb.com/download/srr/{{rls}}" class="srr">
-      <button class="btn btn-success" style="margin-left: 5px; ">SRR</button>
-    </a>
-    <div class="modal fade" id="rlsInfoModal" tabindex="-1" aria-labelledby="rlsInfoModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="rlsInfoModalLabel">Release Info</h5>
-            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <ul>
-              <li>Original Title: <b><span id="title">loading...</span></b></li>
-              <li>Release Size: <b><span id="size">loading...</span></b></li>
-              <li>Released At: <b><span id="date">loading...</span></b></li>
-              <li><b><a href="" target="_blank" id="link">loading...</a></b></li>
-            </ul>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-mdb-dismiss="modal">
+        <button type="button" class="btn btn-light" data-mdb-toggle="modal" data-mdb-target="#nfoImgModal" id="nfo-img-btn" style="margin-left: 5px; ">
+          <i class="fas fa-images"></i> NFO Image
+  </button>
+        <a href="https://www.srrdb.com/download/srr/{{rls}}" class="srr">
+            <button class="btn btn-success" style="margin-left: 5px; "><i class="fas fa-check-square"></i> SRR</button>
+        </a>
+        <div class="modal fade" id="rlsInfoModal" tabindex="-1" aria-labelledby="rlsInfoModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="rlsInfoModalLabel"><i class="fas fa-info"></i> Release Info</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                            <li>Original Title: <b><span id="title">loading...</span></b></li>
+                            <li>Release Size: <b><span id="size">loading...</span></b></li>
+                            <li>Released At: <b><span id="date">loading...</span></b></li>
+                            <li><b><a href="" target="_blank" id="link">loading...</a></b></li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-mdb-dismiss="modal">
               Close
             </button>
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="modal fade" id="nfoImgModal" tabindex="-1" aria-labelledby="nfoImgModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" st>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="nfoImgModalLabel">NFO Image</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="https://dup3.me/includes/image.php?x={{ rls }}&z=1" alt="NFO Image Not Available">
+                        <br>
+                        <small>Image Served by dup3.me</small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-mdb-dismiss="modal">
+              Close
+            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#rls-info-btn').click(function() {
+                let rls = document.getElementById('rls').innerHTML;
+                $.ajax({
+                    url: "https://api.xrel.to/v2/release/info.json?dirname=" + rls,
+                    type: 'GET',
+                    dataType: 'json', // added data type
+                    success: function(res) {
+                        document.getElementById('title').innerHTML = res.ext_info.title;
+                        document.getElementById('size').innerHTML = res.size.number + 'MB';
+                        var epoch = res.time;
+                        epoch *=
+                            1000; // convert to milliseconds (Epoch is usually expressed in seconds, but Javascript uses Milliseconds)
+                        var epoch = epoch + (new Date().getTimezoneOffset() * -1); //for timeZone        
+                        document.getElementById('date').innerHTML = new Date(epoch);
+                        document.getElementById('link').innerHTML = "XRel Link";
+                        $("#link").attr("href", res.ext_info.link_href);
+                    },
+                    error: function() {
+                        document.getElementById('title').innerHTML = 'Could Not Fetch Release Info';
+                        document.getElementById('size').innerHTML = 'Could Not Fetch Release Info';
+                        document.getElementById('date').innerHTML = 'Could Not Fetch Release Info';
+                        document.getElementById('link').innerHTML = "Could Not Fetch Release Info";
+                    }
+                });
+            });
+        </script>
     </div>
-    <script>
-      $('#rls-info-btn').click(function () {
-        let rls = document.getElementById('rls').innerHTML;
-        $.ajax({
-          url: "https://api.xrel.to/v2/release/info.json?dirname=" + rls,
-          type: 'GET',
-          dataType: 'json', // added data type
-          success: function (res) {
-            document.getElementById('title').innerHTML = res.ext_info.title;
-            document.getElementById('size').innerHTML = res.size.number + 'MB';
-            var epoch = res.time;
-            epoch *=
-              1000; // convert to milliseconds (Epoch is usually expressed in seconds, but Javascript uses Milliseconds)
-            var epoch = epoch + (new Date().getTimezoneOffset() * -1); //for timeZone        
-            document.getElementById('date').innerHTML = new Date(epoch);
-            document.getElementById('link').innerHTML = "XRel Link";
-            $("#link").attr("href", res.ext_info.link_href);
-          },
-          error: function () {
-            document.getElementById('title').innerHTML = 'Could Not Fetch Release Info';
-            document.getElementById('size').innerHTML = 'Could Not Fetch Release Info';
-            document.getElementById('date').innerHTML = 'Could Not Fetch Release Info';
-            document.getElementById('link').innerHTML = "Could Not Fetch Release Info";
-          }
-        });
-      });
-    </script>
-  </div>
-  <script src="{{ url_for('static', filename='mdb.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='mdb.min.js') }}"></script>
 </body>
 
 </html>
