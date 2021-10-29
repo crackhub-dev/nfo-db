@@ -67,7 +67,8 @@ def upload_file():
         for i in range(0, 10):
             rand = random.choice(os.listdir("./data")).strip(".nfo")
             random_nfos.append(rand)
-        return render_template("index.html", random_nfos=random_nfos)
+        number_nfos = len(os.listdir("./data"))
+        return render_template("index.html", random_nfos=random_nfos, number_nfos=number_nfos)
     except FileExistsError:
         os.remove(f"./data/{filename}")
         error_msg = "NFO Already Exists!"
